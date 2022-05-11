@@ -1,1 +1,1 @@
-# MVVM-Clean-Architecture
+# MVI Clean Architecture
