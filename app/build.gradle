@@ -61,7 +61,6 @@ dependencies {
     //Dagger - Hilt
     implementation dagger.daggerHilt
     kapt dagger.daggerCompilerKapt
-    implementation dagger.hiltLifecycle
     kapt dagger.hiltCompilerKapt
     implementation dagger.hiltNavigation
 
