@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.deas.mvi"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        compose true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api project(path : ':navigation')
+
+    implementation supportDependencies.core
+    implementation supportDependencies.appcompat
+    implementation supportDependencies.material
+    implementation supportDependencies.constraint
+
+    // Compose dependencies
+    implementation compose.lifecycle
+    implementation compose.navigation
+    implementation compose.accompanist
+
+    // Coroutines
+    implementation corutines.corutinesCore
+    implementation corutines.corutinesAndroid
+
+    // Coroutine Lifecycle Scopes
+    implementation corutineLifeCycle.lifecycleViewModel
+    implementation corutineLifeCycle.lifecycleRuntime
+
+    //Dagger - Hilt
+    implementation dagger.daggerHilt
+    kapt dagger.daggerCompilerKapt
+    implementation dagger.hiltLifecycle
+    kapt dagger.hiltCompilerKapt
+    implementation dagger.hiltNavigation
+
+    // Retrofit
+    implementation network.retrofit
+    implementation network.retrofitConverter
+    implementation network.okhttp
+    implementation network.okhttpInterceptor
+
+    //Test Libraries
+    testImplementation testLibraries.jUnit
+    androidTestImplementation testLibraries.jUnitExt
+    androidTestImplementation testLibraries.espresso
+}
