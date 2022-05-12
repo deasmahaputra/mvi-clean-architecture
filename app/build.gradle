@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+    api project(path : ':feature:home')
     api project(path : ':navigation')
 
     implementation supportDependencies.core
