@@ -1,6 +1,9 @@
-compose_version = "1.0.5"
 
 ext {
+
+    compose_version = '1.0.5'
+    kotlin_version = '1.5.31'
+
     supportDependencies = [
             core    : "androidx.core:core-ktx:1.7.0",
             appcompat : "androidx.appcompat:appcompat:1.4.1",
@@ -29,7 +32,7 @@ ext {
             daggerCompilerKapt : "com.google.dagger:hilt-android-compiler:2.37",
             hiltLifecycle : "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03",
             hiltCompilerKapt : "androidx.hilt:hilt-compiler:1.0.0",
-            hiltNavigation : "androidx.hilt:hilt-navigation-compose:1.0.0"
+            hiltNavigation : "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
     ]
 
     network = [
