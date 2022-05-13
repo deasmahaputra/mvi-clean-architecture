@@ -8,7 +8,7 @@ data class Categories(
 	val total_pages: Int? = null,
 	val pageable: Pageable? = null,
 	val sort: Sort? = null,
-	val content: List<ContentItem?>? = null,
+	val content: List<ContentItem>? = null,
 	val first: Boolean? = null,
 	val total_elements: Int? = null,
 	val empty: Boolean? = null

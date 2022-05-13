@@ -2,11 +2,13 @@ package com.deas.core.di
 
 import com.deas.core.BuildConfig
 import com.google.gson.GsonBuilder
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -19,7 +21,23 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+    fun providesHttpLoggingInterceptor() : HttpLoggingInterceptor {
+        val loggingLevel = HttpLoggingInterceptor.Level.BODY
+        return HttpLoggingInterceptor().setLevel(loggingLevel)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkhttpProfilerInterceptor() : OkHttpProfilerInterceptor {
+        return OkHttpProfilerInterceptor()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        okHttpProfilerInterceptor: OkHttpProfilerInterceptor
+    ): OkHttpClient = OkHttpClient.Builder()
         .readTimeout(30L, TimeUnit.SECONDS)
         .connectTimeout(30L, TimeUnit.SECONDS)
         .addInterceptor { chain ->
@@ -27,7 +45,8 @@ object NetworkModule {
                 .addHeader("Authorization", "")
                 .build()
             chain.proceed(newRequest)
-        }
+        }.addInterceptor(okHttpProfilerInterceptor)
+        .addInterceptor(httpLoggingInterceptor)
         .build()
 
 
