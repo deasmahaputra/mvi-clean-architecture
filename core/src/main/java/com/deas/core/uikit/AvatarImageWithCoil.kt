@@ -29,10 +29,10 @@ fun AvatarImageWithCoil(url:String = "https://www.w3schools.com/howto/img_avatar
         })
     Image(
         painter = painter,
-        contentDescription = "avatar",
+        contentDescription = "product",
         contentScale = ContentScale.Crop,
         modifier = Modifier
-            .size(80.dp)
+            .size(100.dp)
             .clip(CircleShape)
             .border(2.dp, Color.DarkGray, CircleShape)
     )

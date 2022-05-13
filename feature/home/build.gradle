@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -30,10 +32,23 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion kotlin_version
+    }
 }
 
 dependencies {
     api project(path : ':core')
+    api project(path : ':navigation')
+
+    implementation dagger.daggerHilt
+    kapt dagger.daggerCompilerKapt
+    kapt dagger.hiltCompilerKapt
+    implementation dagger.hiltNavigation
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
