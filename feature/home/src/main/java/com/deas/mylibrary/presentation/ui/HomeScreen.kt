@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
@@ -67,7 +68,7 @@ fun CategoryStateHandler(
             val category = categoryState.categories.collectAsState()
             LoadHomeScreenView(
                 navController = navController,
-                content = category.value.content?.toMutableList()?: mutableListOf(),
+                content = category.value.content?.toMutableList() ?: mutableListOf(),
                 categoryViewModel = categoryViewModel
             )
         }
@@ -94,11 +95,14 @@ fun LoadHomeScreenView(
             )
         },
     ) {
-        LazyVerticalGrid(cells = GridCells.Fixed(3), modifier = Modifier.background(Color.DarkGray)){
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(3),
+            modifier = Modifier.background(Color.DarkGray)
+        ) {
             val threshold = 0
             val lastIndex = content.lastIndex
 
-            itemsIndexed(content){index, item ->
+            itemsIndexed(content) { index, item ->
                 CategoryCardView(navController = navController, categories = item)
                 //if(index + threshold )
             }
@@ -112,7 +116,7 @@ fun LoadHomeScreenView(
 fun CategoryCardView(
     navController: NavController,
     categories: Categories.ContentItem
-){
+) {
     Card(modifier = Modifier
         .padding(4.dp)
         .fillMaxWidth()
@@ -120,18 +124,25 @@ fun CategoryCardView(
 
         }) {
 
-        Column (modifier = Modifier.padding(8.dp),
+        Column(
+            modifier = Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AvatarImageWithCoil(
-                url = categories.category_url_image?:""
+                url = categories.category_url_image ?: ""
             )
-            Column(modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = categories.category_name?:"")
+            Column(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Box(modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center){
+                    Text(text = categories.category_name ?: "", textAlign = TextAlign.Center)
+                }
                 Spacer(modifier = Modifier.padding(6.dp))
-
-
             }
         }
     }
