@@ -3,7 +3,7 @@ package com.deas.mylibrary.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.deas.core.base.DataState
 import com.deas.core.base.mvi.BaseViewModel
-import com.deas.mylibrary.domain.model.Categories
+import com.deas.data.model.Categories
 import com.deas.mylibrary.domain.usecase.CategoryUseCase
 import com.deas.mylibrary.presentation.contract.HomeContract
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,6 +1,7 @@
 package com.deas.mylibrary.domain.repository
 
-import com.deas.mylibrary.domain.model.Categories
+import com.deas.data.model.Categories
+
 
 interface ApiHelper {
 

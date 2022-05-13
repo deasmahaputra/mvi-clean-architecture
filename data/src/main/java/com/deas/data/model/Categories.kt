@@ -1,4 +1,4 @@
-package com.deas.mylibrary.domain.model
+package com.deas.data.model
 
 data class Categories(
 	val number: Int? = null,

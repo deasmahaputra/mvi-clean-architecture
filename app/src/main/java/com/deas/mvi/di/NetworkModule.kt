@@ -1,4 +1,4 @@
-package com.deas.core.di
+package com.deas.mvi.di
 
 import com.deas.core.BuildConfig
 import com.google.gson.GsonBuilder

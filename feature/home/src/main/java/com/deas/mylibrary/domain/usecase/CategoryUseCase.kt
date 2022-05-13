@@ -3,7 +3,7 @@ package com.deas.mylibrary.domain.usecase
 import com.deas.core.base.DataState
 import com.deas.core.base.mvi.BaseUseCase
 import com.deas.core.base.mvi.IoDispatcher
-import com.deas.mylibrary.domain.model.Categories
+import com.deas.data.model.Categories
 import com.deas.mylibrary.domain.repository.CategoryRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

@@ -1,6 +1,6 @@
 package com.deas.mylibrary.common.api
 
-import com.deas.mylibrary.domain.model.Categories
+import com.deas.data.model.Categories
 import javax.inject.Inject
 
 class HomeApiHelperImpl @Inject constructor(private val apiService : HomeApiService) : HomeApiHelper {

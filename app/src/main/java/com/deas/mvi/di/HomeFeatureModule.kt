@@ -1,5 +1,7 @@
-package com.deas.mylibrary.common.di
+package com.deas.mvi.di
 
+import com.deas.data.repository.LocalDataSource
+import com.deas.local.source.LocalDataSourceImpl
 import com.deas.mylibrary.common.api.HomeApiHelper
 import com.deas.mylibrary.common.api.HomeApiHelperImpl
 import com.deas.mylibrary.common.api.HomeApiService
@@ -23,6 +25,10 @@ object HomeFeatureModule {
     @Singleton
     @Provides
     fun provideApiHelper(apiHelper: HomeApiHelperImpl): HomeApiHelper = apiHelper
+
+    @Singleton
+    @Provides
+    fun provideLocalDataSource(localDataSourceImpl: LocalDataSourceImpl) : LocalDataSource = localDataSourceImpl
 
     @Singleton
     @Provides

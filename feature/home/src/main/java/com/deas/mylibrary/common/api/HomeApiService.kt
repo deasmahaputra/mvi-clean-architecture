@@ -1,6 +1,6 @@
 package com.deas.mylibrary.common.api
 
-import com.deas.mylibrary.domain.model.Categories
+import com.deas.data.model.Categories
 import retrofit2.http.GET
 
 interface HomeApiService {

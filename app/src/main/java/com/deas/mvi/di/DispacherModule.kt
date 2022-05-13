@@ -1,4 +1,4 @@
-package com.deas.core.di
+package com.deas.mvi.di
 
 import com.deas.core.base.mvi.IoDispatcher
 import dagger.Module

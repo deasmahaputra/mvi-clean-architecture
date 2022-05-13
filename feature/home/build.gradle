@@ -44,6 +44,8 @@ android {
 dependencies {
     api project(path : ':core')
     api project(path : ':navigation')
+    api project(path : ':local')
+    api project(path : ':data')
 
     implementation dagger.daggerHilt
     kapt dagger.daggerCompilerKapt

@@ -3,6 +3,7 @@ ext {
 
     compose_version = '1.0.5'
     kotlin_version = '1.5.31'
+    roomVersion = '2.4.2'
 
     supportDependencies = [
             core    : "androidx.core:core-ktx:1.7.0",

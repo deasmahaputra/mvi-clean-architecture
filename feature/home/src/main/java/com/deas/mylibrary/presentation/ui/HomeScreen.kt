@@ -26,7 +26,7 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.deas.core.uikit.AvatarImageWithCoil
 import com.deas.core.uikit.LoadingView
-import com.deas.mylibrary.domain.model.Categories
+import com.deas.data.model.Categories
 import com.deas.mylibrary.presentation.contract.HomeContract
 import com.deas.mylibrary.presentation.viewmodel.CategoryViewModel
 import com.deas.navigation.base.NavComposableModule
@@ -88,8 +88,8 @@ fun LoadHomeScreenView(
         topBar = {
             TopAppBar(
                 title = {
-                    Row {
-                        Text(text = "Astro")
+                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = "Astro", textAlign = TextAlign.Center)
                     }
                 }
             )

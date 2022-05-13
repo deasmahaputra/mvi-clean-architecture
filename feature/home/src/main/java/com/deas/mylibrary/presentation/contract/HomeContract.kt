@@ -2,7 +2,7 @@ package com.deas.mylibrary.presentation.contract
 
 import com.deas.core.base.mvi.UiIntent
 import com.deas.core.base.mvi.UiState
-import com.deas.mylibrary.domain.model.Categories
+import com.deas.data.model.Categories
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class HomeContract {
