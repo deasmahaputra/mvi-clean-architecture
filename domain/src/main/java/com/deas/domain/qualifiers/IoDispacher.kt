@@ -1,4 +1,4 @@
-package com.deas.core.base.mvi
+package com.deas.domain.qualifiers
 
 import javax.inject.Qualifier
 

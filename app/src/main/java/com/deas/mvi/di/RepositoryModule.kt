@@ -2,11 +2,11 @@ package com.deas.mvi.di
 
 import com.deas.data.repository.LocalDataSource
 import com.deas.local.source.LocalDataSourceImpl
-import com.deas.mylibrary.common.api.HomeApiHelper
-import com.deas.mylibrary.common.api.HomeApiHelperImpl
-import com.deas.mylibrary.common.api.HomeApiService
-import com.deas.mylibrary.domain.repository.CategoryRepository
-import com.deas.mylibrary.domain.repository.CategoryRepositoryImpl
+import com.deas.remote.source.RemoteDataSourceImpl
+import com.deas.data.repository.CategoryRepositoryImpl
+import com.deas.data.repository.RemoteDataSource
+import com.deas.domain.repository.Repository
+import com.deas.remote.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,15 +16,16 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object HomeFeatureModule {
+object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit): HomeApiService = retrofit.create(HomeApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(
+        ApiService::class.java)
 
     @Singleton
     @Provides
-    fun provideApiHelper(apiHelper: HomeApiHelperImpl): HomeApiHelper = apiHelper
+    fun provideApiHelper(apiHelper: RemoteDataSourceImpl): RemoteDataSource = apiHelper
 
     @Singleton
     @Provides
@@ -34,5 +35,5 @@ object HomeFeatureModule {
     @Provides
     fun provideUserRepository(
         userRepositoryImpl: CategoryRepositoryImpl
-    ): CategoryRepository = userRepositoryImpl
+    ): Repository = userRepositoryImpl
 }

@@ -46,6 +46,8 @@ dependencies {
     api project(path : ':navigation')
     api project(path : ':local')
     api project(path : ':data')
+    api project(path : ':domain')
+    api project(path : ':remote')
 
     implementation dagger.daggerHilt
     kapt dagger.daggerCompilerKapt

@@ -1,10 +1,10 @@
-package com.deas.mylibrary.domain.usecase
+package com.deas.domain.usecase
 
 import com.deas.core.base.DataState
 import com.deas.core.base.mvi.BaseUseCase
-import com.deas.core.base.mvi.IoDispatcher
-import com.deas.data.model.Categories
-import com.deas.mylibrary.domain.repository.CategoryRepository
+import com.deas.domain.entity.CategoryEntity
+import com.deas.domain.qualifiers.IoDispatcher
+import com.deas.domain.repository.Repository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,17 +13,17 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class CategoryUseCase @Inject constructor(
-    private val categoryRepository : CategoryRepository,
+    private val repository : Repository,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
-) : BaseUseCase<Categories, String>(){
+) : BaseUseCase<CategoryEntity, String>(){
 
-    override suspend fun buildRequest(params: String?): Flow<DataState<Categories>> {
+    override suspend fun buildRequest(params: String?): Flow<DataState<CategoryEntity>> {
         if(params == null){
             return flow {
                 emit(DataState.Error(Exception("params can't be null")))
             }.flowOn(dispatcher)
         }
-        return categoryRepository.getCategories().flowOn(dispatcher)
+        return repository.getCategories().flowOn(dispatcher)
     }
 
 

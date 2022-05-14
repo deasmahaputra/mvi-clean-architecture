@@ -42,6 +42,7 @@ dependencies {
     implementation project(path : ':core')
     implementation project(path : ':data')
     implementation project(path : ':local')
+    implementation project(path : ':remote')
 
     implementation 'com.localebro:okhttpprofiler:1.0.8'
 

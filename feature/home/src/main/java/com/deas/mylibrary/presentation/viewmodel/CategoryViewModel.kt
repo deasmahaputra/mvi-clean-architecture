@@ -3,8 +3,10 @@ package com.deas.mylibrary.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.deas.core.base.DataState
 import com.deas.core.base.mvi.BaseViewModel
-import com.deas.data.model.Categories
-import com.deas.mylibrary.domain.usecase.CategoryUseCase
+import com.deas.data.repository.Mapper
+import com.deas.domain.entity.CategoryEntity
+import com.deas.mylibrary.domain.model.Categories
+import com.deas.domain.usecase.CategoryUseCase
 import com.deas.mylibrary.presentation.contract.HomeContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -12,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryViewModel @Inject constructor(private val categoryUseCase : CategoryUseCase) : BaseViewModel<HomeContract.Intent, HomeContract.ScreenState>() {
+class CategoryViewModel @Inject constructor(
+    private val categoryUseCase : CategoryUseCase,
+    private val mapper: Mapper<CategoryEntity, Categories>
+    ) : BaseViewModel<HomeContract.Intent, HomeContract.ScreenState>() {
 
     private val _categories = MutableStateFlow(Categories())
 
@@ -45,7 +50,7 @@ class CategoryViewModel @Inject constructor(private val categoryUseCase : Catego
                             }
                         }
                         is DataState.Success -> {
-                            _categories.emit(stateCategory.data)
+                            _categories.emit(mapper.from(stateCategory.data))
                             setState {
                                 HomeContract.ScreenState.Categories(
                                     HomeContract.CategoryState.Success(_categories)

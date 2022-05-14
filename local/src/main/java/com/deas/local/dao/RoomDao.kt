@@ -15,4 +15,7 @@ interface RoomDao {
     @Query("SELECT * FROM categories")
     suspend fun getContentCategory() : List<CategoriesLocalModel>
 
+    @Query("DELETE FROM categories")
+    suspend fun clearCachedWeatherItems()
+
 }

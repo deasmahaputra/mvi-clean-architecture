@@ -1,6 +1,6 @@
 package com.deas.mvi.di
 
-import com.deas.core.base.mvi.IoDispatcher
+import com.deas.domain.qualifiers.IoDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

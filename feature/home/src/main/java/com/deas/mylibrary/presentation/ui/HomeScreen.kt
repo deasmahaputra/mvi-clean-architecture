@@ -26,10 +26,9 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.deas.core.uikit.AvatarImageWithCoil
 import com.deas.core.uikit.LoadingView
-import com.deas.data.model.Categories
+import com.deas.mylibrary.domain.model.Categories
 import com.deas.mylibrary.presentation.contract.HomeContract
 import com.deas.mylibrary.presentation.viewmodel.CategoryViewModel
-import com.deas.navigation.base.NavComposableModule
 
 @ExperimentalCoilApi
 @Composable

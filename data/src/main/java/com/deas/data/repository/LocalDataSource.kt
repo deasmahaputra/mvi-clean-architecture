@@ -1,12 +1,15 @@
 package com.deas.data.repository
 
-import com.deas.data.model.Categories
+import com.deas.data.model.CategoriesDto
+
 
 interface LocalDataSource {
 
-    suspend fun addItem(category : Categories)
+    suspend fun addItem(category : CategoriesDto)
 
-    suspend fun getItems() : List<Categories>
+    suspend fun getItems() : List<CategoriesDto>
 
-    suspend fun updateItem(category: Categories)
+    suspend fun updateItem(category: CategoriesDto)
+
+    suspend fun clearCachedItems()
 }
