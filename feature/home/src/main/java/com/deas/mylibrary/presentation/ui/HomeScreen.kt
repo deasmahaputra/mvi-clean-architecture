@@ -87,8 +87,9 @@ fun LoadHomeScreenView(
         topBar = {
             TopAppBar(
                 title = {
-                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(text = "Astro", textAlign = TextAlign.Center)
+                    Column(Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = "Astro MVI Architecture", textAlign = TextAlign.Center)
                     }
                 }
             )
