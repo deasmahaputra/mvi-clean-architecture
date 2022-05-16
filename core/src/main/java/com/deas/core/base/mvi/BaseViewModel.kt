@@ -1,11 +1,13 @@
 package com.deas.core.base.mvi
 
+import android.media.effect.Effect
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<Intent : UiIntent, State : UiState> : ViewModel() {
+abstract class BaseViewModel<Intent : UiIntent, State : UiState, Effect : UiEffect> : ViewModel() {
 
     private val initialState : State by lazy { createInitialState() }
     abstract fun createInitialState() : State
@@ -18,6 +20,9 @@ abstract class BaseViewModel<Intent : UiIntent, State : UiState> : ViewModel() {
 
     private val _intent : MutableSharedFlow<Intent> = MutableSharedFlow()
     val intent = _intent.asSharedFlow()
+
+    private val _effect : Channel<Effect> = Channel()
+    val effect = _effect.receiveAsFlow()
 
     /**
      * Start listening to Event
@@ -52,6 +57,14 @@ abstract class BaseViewModel<Intent : UiIntent, State : UiState> : ViewModel() {
         val newState = currentState.reduce()
         _uiState.value = newState
     }
+
+
+    protected fun setEffect(builder : () -> Effect ){
+        val effectValue = builder()
+        viewModelScope.launch { _effect.send(effectValue) }
+    }
+
+
 
     init {
         subscribeIntent()

@@ -35,7 +35,7 @@ import com.deas.mylibrary.presentation.viewmodel.CategoryViewModel
 internal fun HomeScreen(navController: NavController, categoryViewModel: CategoryViewModel) {
 
     when (val screenState = categoryViewModel.uiState.collectAsState().value) {
-        is HomeContract.ScreenState.Idle -> {
+        is HomeContract.ScreenState.Idlee -> {
             categoryViewModel.setIntent(
                 intent = HomeContract.Intent.GetCategories
             )

@@ -17,12 +17,12 @@ import javax.inject.Inject
 class CategoryViewModel @Inject constructor(
     private val categoryUseCase : CategoryUseCase,
     private val mapper: Mapper<CategoryEntity, Categories>
-    ) : BaseViewModel<HomeContract.Intent, HomeContract.ScreenState>() {
+    ) : BaseViewModel<HomeContract.Intent, HomeContract.ScreenState, HomeContract.SideEffect>() {
 
     private val _categories = MutableStateFlow(Categories())
 
     override fun createInitialState(): HomeContract.ScreenState {
-        return HomeContract.ScreenState.Idle
+        return HomeContract.ScreenState.Idlee
     }
 
     override fun handleIntent(intent: HomeContract.Intent) {
@@ -39,9 +39,6 @@ class CategoryViewModel @Inject constructor(
                 }
                 .collect{ stateCategory ->
                     when(stateCategory) {
-                        is DataState.Error -> {
-
-                        }
                         is DataState.Loading -> {
                             setState {
                                 HomeContract.ScreenState.Categories(
@@ -57,6 +54,10 @@ class CategoryViewModel @Inject constructor(
                                 )
                             }
 
+                        }
+
+                        is DataState.Error -> {
+                            setEffect { HomeContract.SideEffect.ShowError(message = stateCategory.exception.message?:"") }
                         }
                     }
                 }
