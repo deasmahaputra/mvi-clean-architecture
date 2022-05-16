@@ -1,6 +1,7 @@
 package com.deas.mylibrary.domain.model
 
 data class Categories(
+	val id: Int? = null,
 	val number: Int? = null,
 	val last: Boolean? = null,
 	val number_of_elements: Int? = null,

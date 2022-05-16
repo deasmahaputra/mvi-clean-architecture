@@ -29,14 +29,13 @@ import com.deas.core.uikit.LoadingView
 import com.deas.mylibrary.domain.model.Categories
 import com.deas.mylibrary.presentation.contract.HomeContract
 import com.deas.mylibrary.presentation.viewmodel.CategoryViewModel
-import com.deas.navigation.base.NavComposableModule
 
 @ExperimentalCoilApi
 @Composable
 internal fun HomeScreen(navController: NavController, categoryViewModel: CategoryViewModel) {
 
     when (val screenState = categoryViewModel.uiState.collectAsState().value) {
-        is HomeContract.ScreenState.Idle -> {
+        is HomeContract.ScreenState.Idlee -> {
             categoryViewModel.setIntent(
                 intent = HomeContract.Intent.GetCategories
             )
@@ -88,8 +87,9 @@ fun LoadHomeScreenView(
         topBar = {
             TopAppBar(
                 title = {
-                    Row {
-                        Text(text = "Astro")
+                    Column(Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = "Astro MVI Architecture", textAlign = TextAlign.Center)
                     }
                 }
             )

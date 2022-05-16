@@ -3,6 +3,15 @@ ext {
 
     compose_version = '1.0.5'
     kotlin_version = '1.5.31'
+    roomVersion = '2.4.2'
+    coroutines = "1.4.2"
+
+    //test
+    mockkVersion = "1.11.0"
+    mockkAndroidVersion = "1.11.0"
+    turbineVersion = "0.5.2"
+    coreTestingVersion = "2.1.0"
+    truthVersion = "1.1.2"
 
     supportDependencies = [
             core    : "androidx.core:core-ktx:1.7.0",

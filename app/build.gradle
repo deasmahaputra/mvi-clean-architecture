@@ -37,26 +37,14 @@ android {
 }
 
 dependencies {
-    api project(path : ':feature:home')
-    api project(path : ':navigation')
+    implementation project(path : ':feature:home')
+    implementation project(path : ':navigation')
+    implementation project(path : ':core')
+    implementation project(path : ':data')
+    implementation project(path : ':local')
+    implementation project(path : ':remote')
 
-    implementation supportDependencies.core
-    implementation supportDependencies.appcompat
-    implementation supportDependencies.material
-    implementation supportDependencies.constraint
-
-    // Compose dependencies
-    implementation compose.lifecycle
-    implementation compose.navigation
-    implementation compose.accompanist
-
-    // Coroutines
-    implementation corutines.corutinesCore
-    implementation corutines.corutinesAndroid
-
-    // Coroutine Lifecycle Scopes
-    implementation corutineLifeCycle.lifecycleViewModel
-    implementation corutineLifeCycle.lifecycleRuntime
+    implementation 'com.localebro:okhttpprofiler:1.0.8'
 
     //Dagger - Hilt
     implementation dagger.daggerHilt
@@ -70,8 +58,4 @@ dependencies {
     implementation network.okhttp
     implementation network.okhttpInterceptor
 
-    //Test Libraries
-    testImplementation testLibraries.jUnit
-    androidTestImplementation testLibraries.jUnitExt
-    androidTestImplementation testLibraries.espresso
 }
