@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             ComposeBaseTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = Screen.Home.name
+                    startDestination = Screen.Home.params
                 ) {
                     loadMultiNavComposable(navController)
                 }

@@ -62,7 +62,7 @@ class CategoryViewModelTest {
             categoryViewModel.setIntent(HomeContract.Intent.GetCategories)
 
             Truth.assertThat(expectItem().equals(
-                HomeContract.ScreenState.Categories(HomeContract.CategoryState.Idlee)))
+                HomeContract.ScreenState.Categories(HomeContract.CategoryState.Idle)))
 
             Truth.assertThat(expectItem().equals(
                 HomeContract.ScreenState.Categories(HomeContract.CategoryState.Loading)))
@@ -93,7 +93,7 @@ class CategoryViewModelTest {
 
             categoryViewModel.setIntent(HomeContract.Intent.GetCategories)
 
-            Truth.assertThat(expectItem() == HomeContract.ScreenState.Categories(HomeContract.CategoryState.Idlee))
+            Truth.assertThat(expectItem() == HomeContract.ScreenState.Categories(HomeContract.CategoryState.Idle))
 
             Truth.assertThat(expectItem() == HomeContract.ScreenState.Categories(HomeContract.CategoryState.Loading))
 

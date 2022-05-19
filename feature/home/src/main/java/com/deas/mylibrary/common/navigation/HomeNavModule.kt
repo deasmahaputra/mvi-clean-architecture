@@ -9,7 +9,7 @@ import com.deas.navigation.base.NavComposableModule
 val homeScreenNavModule = NavComposableModule{ navHost, navController ->
     navHost.apply {
         composable(
-            Screen.Home.name
+            Screen.Home.params
         ){
             HomeScreen(navController = navController,
                 categoryViewModel = hiltViewModel()

@@ -2,6 +2,7 @@ package com.deas.mvi
 
 import android.app.Application
 import com.deas.mylibrary.common.navigation.homeScreenNavModule
+import com.deas.mylibrary.common.navigation.detailScreenNavModule
 import com.deas.navigation.base.multiNavigationModule
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,7 +17,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         multiNavigationModule(
-            homeScreenNavModule
+            homeScreenNavModule,
+            detailScreenNavModule
         )
     }
 

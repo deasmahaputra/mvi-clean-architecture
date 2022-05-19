@@ -1,5 +1,8 @@
 package com.deas.mylibrary.presentation.ui
 
+import android.content.Context
+import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -25,24 +28,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.deas.core.uikit.AvatarImageWithCoil
+import com.deas.core.uikit.ErrorView
 import com.deas.core.uikit.LoadingView
 import com.deas.mylibrary.domain.model.Categories
 import com.deas.mylibrary.presentation.contract.HomeContract
 import com.deas.mylibrary.presentation.viewmodel.CategoryViewModel
+import com.deas.navigation.Screen
+import com.google.gson.Gson
+import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoilApi
 @Composable
 internal fun HomeScreen(navController: NavController, categoryViewModel: CategoryViewModel) {
 
     when (val screenState = categoryViewModel.uiState.collectAsState().value) {
-        is HomeContract.ScreenState.Idlee -> {
+        is HomeContract.ScreenState.Idle -> {
             categoryViewModel.setIntent(
                 intent = HomeContract.Intent.GetCategories
             )
-        }
-        is HomeContract.ScreenState.Loading -> LoadingView()
-        is HomeContract.ScreenState.SideEffect -> {
-
         }
         is HomeContract.ScreenState.Categories -> {
             CategoryStateHandler(
@@ -50,6 +53,19 @@ internal fun HomeScreen(navController: NavController, categoryViewModel: Categor
                 navController = navController,
                 categoryViewModel = categoryViewModel
             )
+        }
+        is HomeContract.ScreenState.SideEffect -> {
+            SideEffectHandler(effectState = screenState.sideEffect)
+        }
+    }
+
+}
+
+@Composable
+fun SideEffectHandler(effectState: HomeContract.SideEffect) {
+    when (effectState) {
+        is HomeContract.SideEffect.ShowError -> {
+            ErrorView()
         }
     }
 }
@@ -82,13 +98,15 @@ fun LoadHomeScreenView(
     content: MutableList<Categories.ContentItem>,
     categoryViewModel: CategoryViewModel
 ) {
-    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Column(Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         Text(text = "Astro MVI Architecture", textAlign = TextAlign.Center)
                     }
                 }
@@ -99,15 +117,11 @@ fun LoadHomeScreenView(
             cells = GridCells.Fixed(3),
             modifier = Modifier.background(Color.DarkGray)
         ) {
-            val threshold = 0
-            val lastIndex = content.lastIndex
-
             itemsIndexed(content) { index, item ->
                 CategoryCardView(navController = navController, categories = item)
-                //if(index + threshold )
             }
         }
-        Toast.makeText(context, content[0].category_name, Toast.LENGTH_LONG).show()
+
     }
 }
 
@@ -121,9 +135,13 @@ fun CategoryCardView(
         .padding(4.dp)
         .fillMaxWidth()
         .clickable {
-
+            val dataCategory = Uri.encode(Gson().toJson(categories))
+            navController.navigate(
+                Screen.Detail.withArgs(
+                    dataCategory
+                )
+            )
         }) {
-
         Column(
             modifier = Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -138,8 +156,10 @@ fun CategoryCardView(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center){
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(text = categories.category_name ?: "", textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.padding(6.dp))

@@ -24,6 +24,7 @@ abstract class BaseViewModel<Intent : UiIntent, State : UiState, Effect : UiEffe
     private val _effect : Channel<Effect> = Channel()
     val effect = _effect.receiveAsFlow()
 
+
     /**
      * Start listening to Event
      */
@@ -49,7 +50,6 @@ abstract class BaseViewModel<Intent : UiIntent, State : UiState, Effect : UiEffe
         viewModelScope.launch { _intent.emit(newIntent) }
     }
 
-
     /**
      * Set new Ui State
      */
@@ -58,7 +58,9 @@ abstract class BaseViewModel<Intent : UiIntent, State : UiState, Effect : UiEffe
         _uiState.value = newState
     }
 
-
+    /**
+     * Set new Effect
+     */
     protected fun setEffect(builder : () -> Effect ){
         val effectValue = builder()
         viewModelScope.launch { _effect.send(effectValue) }

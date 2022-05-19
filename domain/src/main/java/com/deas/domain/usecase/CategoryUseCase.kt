@@ -25,6 +25,6 @@ class CategoryUseCase @Inject constructor(
         }
         return repository.getCategories().flowOn(dispatcher)
     }
-
-
 }
+
+

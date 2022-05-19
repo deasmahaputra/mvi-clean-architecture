@@ -22,7 +22,7 @@ class CategoryViewModel @Inject constructor(
     private val _categories = MutableStateFlow(Categories())
 
     override fun createInitialState(): HomeContract.ScreenState {
-        return HomeContract.ScreenState.Idlee
+        return HomeContract.ScreenState.Idle
     }
 
     override fun handleIntent(intent: HomeContract.Intent) {
@@ -33,7 +33,7 @@ class CategoryViewModel @Inject constructor(
 
     private fun getCategories(){
         viewModelScope.launch {
-            categoryUseCase.execute("deas")
+            categoryUseCase.execute("")
                 .onStart {
                     emit(DataState.Loading)
                 }
@@ -49,42 +49,23 @@ class CategoryViewModel @Inject constructor(
                         is DataState.Success -> {
                             _categories.emit(mapper.from(stateCategory.data))
                             setState {
+                                stateCategory.data
                                 HomeContract.ScreenState.Categories(
                                     HomeContract.CategoryState.Success(_categories)
                                 )
                             }
-
                         }
-
                         is DataState.Error -> {
+                            setState {
+                                HomeContract.ScreenState.SideEffect(
+                                    HomeContract.SideEffect.ShowError("")
+                                )
+                            }
                             setEffect { HomeContract.SideEffect.ShowError(message = stateCategory.exception.message?:"") }
                         }
                     }
                 }
         }
-//        categoryUseCase().onEach { stateCategory ->
-//            when(stateCategory) {
-//                is DataState.Error -> {
-//
-//                }
-//                is DataState.Loading -> {
-//                    setState {
-//                        HomeContract.ScreenState.Categories(
-//                            HomeContract.CategoryState.Loading
-//                        )
-//                    }
-//                }
-//                is DataState.Success -> {
-//                    _categories.emit(stateCategory.data)
-//                    setState {
-//                        HomeContract.ScreenState.Categories(
-//                            HomeContract.CategoryState.Success(_categories)
-//                        )
-//                    }
-//
-//                }
-//            }
-//        }.launchIn(viewModelScope)
     }
 
 }

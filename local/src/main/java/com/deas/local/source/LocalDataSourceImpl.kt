@@ -18,15 +18,12 @@ class LocalDataSourceImpl @Inject constructor(
         return roomDao.addContentCategory(category = categoryLocalModel)
     }
 
-
     override suspend fun getItems(): List<CategoriesDto> {
         val categoryLocalList = roomDao.getContentCategory()
         return mapper.fromList(categoryLocalList)
     }
 
-    override suspend fun updateItem(category: CategoriesDto) {
-
-    }
+    override suspend fun updateItem(category: CategoriesDto) {}
 
     override suspend fun clearCachedItems() {
         return roomDao.clearCachedWeatherItems()

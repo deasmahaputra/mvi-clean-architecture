@@ -15,7 +15,6 @@ class CategoryRepositoryImpl @Inject constructor(
     private val localDataSource : LocalDataSource,
     private val mapper : Mapper<CategoriesDto, CategoryEntity>
 ) : Repository {
-
     override suspend fun getCategories(): Flow<DataState<CategoryEntity>>{
         return flow {
             try {

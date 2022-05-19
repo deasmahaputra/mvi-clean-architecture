@@ -13,21 +13,20 @@ class HomeContract {
     }
 
     sealed class ScreenState : UiState {
-        object Idlee : ScreenState()
-        object Loading : ScreenState()
+        object Idle : ScreenState()
         data class Categories(val categoryState : CategoryState) : ScreenState()
         data class SideEffect(val sideEffect : HomeContract.SideEffect) : ScreenState()
     }
 
     sealed class CategoryState {
-        object Idlee : CategoryState()
+        object Idle : CategoryState()
         object Loading : CategoryState()
         data class Success(val categories : MutableStateFlow<Categories>) : CategoryState()
-        data class Error(val errorMessage : String?) : CategoryState()
-        data class Empty(val emptyMessage : String?) : CategoryState()
     }
 
     sealed class SideEffect : UiEffect {
         data class ShowError(val message : String) : SideEffect()
     }
 }
+
+

@@ -19,3 +19,4 @@ interface RoomDao {
     suspend fun clearCachedWeatherItems()
 
 }
+

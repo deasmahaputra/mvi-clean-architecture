@@ -1,5 +1,9 @@
 package com.deas.mylibrary.domain.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Categories(
 	val id: Int? = null,
 	val number: Int? = null,
@@ -13,8 +17,9 @@ data class Categories(
 	val first: Boolean? = null,
 	val total_elements: Int? = null,
 	val empty: Boolean? = null
-){
+) : Parcelable {
 
+	@Parcelize
 	data class ContentItem(
 		val is_twenty_one: Boolean? = null,
 		val title_visible: Boolean? = null,
@@ -25,22 +30,23 @@ data class Categories(
 		val category_active: Boolean? = null,
 		val is_product_exist: Boolean? = null,
 		val category_childs: List<CategoryChildsItem?>? = null
-	){
+	) : Parcelable {
+		@Parcelize
 		data class CategoryChildsItem(
 			val is_twenty_one: Boolean? = null,
 			val title_visible: Boolean? = null,
 			val category_name: String? = null,
 			val category_id: Int? = null,
 			val category_position: Int? = null,
-			val category_url_image: Any? = null,
+			val category_url_image: String? = null,
 			val category_active: Boolean? = null,
 			val is_product_exist: Boolean? = null
-		)
+		) : Parcelable
 	}
 }
 
 
-
+@Parcelize
 data class Pageable(
 	val paged: Boolean? = null,
 	val page_number: Int? = null,
@@ -48,13 +54,14 @@ data class Pageable(
 	val page_size: Int? = null,
 	val unpaged: Boolean? = null,
 	val sort: Sort? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Sort(
 	val unsorted: Boolean? = null,
 	val sorted: Boolean? = null,
 	val empty: Boolean? = null
-)
+) : Parcelable
 
 
 
